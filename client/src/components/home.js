@@ -11,6 +11,7 @@ export class Home extends Component {
         super(props)
         this.state = {
             isCustomer: "",
+            isCustomerHidden: true,
             country: "",
             location: "",
             cellphone: "",
@@ -24,77 +25,71 @@ export class Home extends Component {
         }
     }
 
-    componentDidMount() {
-
-    }
-
     test = () => {
-        axios.post("/api/test", { "test": "Hello World", "Timothy": "Sankara" })
+        axios.post("/api/getPrediction", { "test": "Hello World", "Timothy": "Sankara" })
             // .then(response => this.setState({ message: response }))
             .then(response => console.log(response.data))
     }
 
-    countrySelect = () => {
-
-    }
-
     render() {
         const countryOptions = [
-            { value: "Kenya", label: "Kenya" },
-            { value: "Tanzania", label: "Tanzania" },
-            { value: "Rwanda", label: "Rwanda" },
-            { value: "Uganda", label: "Uganda" }
+            { value: 0, label: "Kenya" },
+            { value: 2, label: "Tanzania" },
+            { value: 1, label: "Rwanda" },
+            { value: 3, label: "Uganda" }
         ]
 
         const locationOptions = [
-            { value: "Rural", label: "Rural" },
-            { value: "Urban", label: "Urban" }
+            { value: 0, label: "Rural" },
+            { value: 1, label: "Urban" }
         ]
 
         const cellphoneOptions = [
-            { value: "Yes", label: "Yes" },
-            { value: "No", label: "No" }
+            { value: 0, label: "Yes" },
+            { value: 1, label: "No" }
         ]
 
         const genderOptions = [
-            { value: "Male", label: "Male" },
-            { value: "Female", label: "Female" }
+            { value: 1, label: "Male" },
+            { value: 0, label: "Female" }
         ]
 
         const relationshipOptions = [
-            { value: "Child", label: "Child" },
-            { value: "Parent", label: "Parent" },
-            { value: "Other Relative", label: "Other Relative" },
-            { value: "Other non-relative", label: "Other non-relative" },
-            { value: "Head of Household", label: "Head of Household" },
+            { value: 5, label: "Child" },
+            { value: 4, label: "Parent" },
+            { value: 0, label: "Other Relative" },
+            { value: 3, label: "Other non-relative" },
+            { value: 1, label: "Head of Household" },
+            { value: 2, label: "Spouse" },
         ]
 
         const maritalOptions = [
-            { value: "Widowed", label: "Widowed" },
-            { value: "Don't Know", label: "Don't Know" },
-            { value: "Divorced/Separated", label: "Divorced/Separated" },
-            { value: "Single/Never Married", label: "Single/Never Married" },
-            { value: "Married/Living Together", label: "Married/Living Together" },
+            { value: 1, label: "Widowed" },
+            { value: 4, label: "Don't Know" },
+            { value: 2, label: "Divorced/Separated" },
+            { value: 0, label: "Single/Never Married" },
+            { value: 3, label: "Married/Living Together" },
         ]
 
         const educationalOptions = [
-            { value: "Other/Don't know", label: "Other/Don't Know" },
-            { value: "Primary Education", label: "Primary Education" },
-            { value: "Tertiary Education", label: "Tertiary Education" },
-            { value: "Secondary Education", label: "Secondary Education" },
-            { value: "No Formal Education", label: "No Formal Education" },
+            { value: 0, label: "Other/Don't Know" },
+            { value: 5, label: "Primary Education" },
+            { value: 4, label: "Tertiary Education" },
+            { value: 2, label: "Secondary Education" },
+            { value: 3, label: "No Formal Education" },
+            { value: 1, label: "Vocational/Specialised training" },
         ]
 
         const jobOptions = [
-            { value: "No Income", label: "No Income" },
-            { value: "Self Employed", label: "Self Employed" },
-            { value: "Formally Employed Government", label: "Formally Employed Government" },
-            { value: "Farming and Fishing", label: "Farming and Fishing" },
-            { value: "Informally employed", label: "Informally employed" },
-            { value: "Government Dependent", label: "Goverment Dependent" },
-            { value: "Remittance Dependent", label: "Remittance Dependent" },
-            { value: "Formally Employed Private", label: "Formally Employed Private" },
-            { value: "Refused to answer/Don't know", label: "Refused to answer/Don't know" },
+            { value: 8, label: "No Income" },
+            { value: 6, label: "Self Employed" },
+            { value: 5, label: "Formally Employed Government" },
+            { value: 4, label: "Farming and Fishing" },
+            { value: 1, label: "Informally employed" },
+            { value: 2, label: "Goverment Dependent" },
+            { value: 0, label: "Remittance Dependent" },
+            { value: 2, label: "Formally Employed Private" },
+            { value: 9, label: "Refused to answer/Don't know" },
         ]
 
         const terrainOptions = [
@@ -132,7 +127,7 @@ export class Home extends Component {
                                     options={
                                         countryOptions
                                     }
-                                    onChange={(e) => this.setState({ country: e.value })}
+                                    onChange={(e) => this.setState({ country: Number(e.value) })}
                                 />
                             </div>
                             <div className="col-3">
@@ -141,7 +136,7 @@ export class Home extends Component {
                                     options={
                                         locationOptions
                                     }
-                                    onChange={(e) => this.setState({ location: e.value })}
+                                    onChange={(e) => this.setState({ location: Number(e.value) })}
                                 />
                             </div>
                             <div className="col-3">
@@ -150,7 +145,7 @@ export class Home extends Component {
                                     options={
                                         cellphoneOptions
                                     }
-                                    onChange={(e) => this.setState({ cellphone: e.value })}
+                                    onChange={(e) => this.setState({ cellphone: Number(e.value) })}
                                 />
                             </div>
                             <div className="col-3">
@@ -159,7 +154,7 @@ export class Home extends Component {
                                     options={
                                         genderOptions
                                     }
-                                    onChange={(e) => this.setState({ gender: e.value })}
+                                    onChange={(e) => this.setState({ gender: Number(e.value) })}
                                 />
                             </div>
                         </div>
@@ -167,12 +162,12 @@ export class Home extends Component {
 
                             <div className="col-3">
                                 <label>Household Size</label>
-                                <input className="form-control" type="number" onChange={(e) => this.setState({ householdSize: e.target.value })} />
+                                <input className="form-control" type="number" onChange={(e) => this.setState({ householdSize: Number(e.target.value) })} />
                             </div>
 
                             <div className="col-3">
                                 <label>Age</label>
-                                <input className="form-control" type="number" onChange={(e) => this.setState({ age: e.target.value })} />
+                                <input className="form-control" type="number" onChange={(e) => this.setState({ age: Number(e.target.value) })} />
                             </div>
 
                             <div className="col-3">
@@ -181,7 +176,7 @@ export class Home extends Component {
                                     options={
                                         relationshipOptions
                                     }
-                                    onChange={(e) => this.setState({ relationshipWithHead: e.value })}
+                                    onChange={(e) => this.setState({ relationshipWithHead: Number(e.value) })}
                                 />
                             </div>
 
@@ -191,7 +186,7 @@ export class Home extends Component {
                                     options={
                                         maritalOptions
                                     }
-                                    onChange={(e) => this.setState({ maritalStatus: e.value })}
+                                    onChange={(e) => this.setState({ maritalStatus: Number(e.value) })}
                                 />
                             </div>
 
@@ -204,7 +199,7 @@ export class Home extends Component {
                                     options={
                                         educationalOptions
                                     }
-                                    onChange={(e) => this.setState({ educationLevel: e.value })}
+                                    onChange={(e) => this.setState({ educationLevel: Number(e.value) })}
                                 />
                             </div>
 
@@ -214,7 +209,7 @@ export class Home extends Component {
                                     options={
                                         jobOptions
                                     }
-                                    onChange={(e) => this.setState({ jobType: e.value })}
+                                    onChange={(e) => this.setState({ jobType: Number(e.value) })}
                                 />
                             </div>
 
@@ -222,13 +217,13 @@ export class Home extends Component {
 
                         <div className="row col-6 mx-auto mt-5">
                             {/* <div className="col"> */}
-                            <button className="btn btn-success form-control my-3" onClick={this.calcuateQ}>Predict</button>
+                            <button className="btn btn-success form-control my-3" onClick={this.test}>Predict</button>
                             {/* </div> */}
                         </div>
 
                         {/* <button onClick={this.test}>Test</button> */}
                         {/* <button className="btn btn-success my-3" onClick={this.test2}>Test2</button> */}
-                        <p hidden={this.state.isCustomer}>Is this a potential customer: {this.state.qValue}</p>
+                        <p hidden={this.state.isCustomerHidden}>Is this a potential customer: {this.state.qValue}</p>
                     </div>
                 </div>
 
