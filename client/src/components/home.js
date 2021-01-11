@@ -23,11 +23,9 @@ export class Home extends Component {
         }
     }
 
-    componentDidMount() {
-
-    }
-
     test = () => {
+
+        this.setState({ isCustomer: "" })
 
         let predictData = [
             this.state.country,
@@ -40,15 +38,9 @@ export class Home extends Component {
         axios.post("/api/getPrediction", { data: predictData })
             .then(response => {
                 response.data.Prediction == 0 ? this.setState({ isCustomer: "No" }) : this.setState({ isCustomer: "Yes" })
-                this.setState({isCustomerHidden: false})
+                this.setState({ isCustomerHidden: false })
             }
             )
-
-        console.log(predictData)
-    }
-
-    countrySelect = () => {
-
     }
 
     render() {
@@ -108,12 +100,10 @@ export class Home extends Component {
                                     onChange={(e) => this.setState({ cellphone: e.value })}
                                 />
                             </div>
-
                             <div className="col-2">
                                 <label>Age</label>
                                 <input className="form-control" type="number" onChange={(e) => this.setState({ age: e.target.value })} />
                             </div>
-
                             <div className="col-3">
                                 <label>Year</label>
                                 <Select
@@ -130,7 +120,6 @@ export class Home extends Component {
                         <p hidden={this.state.isCustomerHidden}>Is this a potential customer: {this.state.isCustomer}</p>
                     </div>
                 </div>
-
             </div >
         )
     }
